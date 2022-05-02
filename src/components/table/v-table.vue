@@ -1,5 +1,12 @@
 <template>
   <div class="v-table">
+    <div class="v-search">
+      <input 
+        type="search" 
+        v-model="search" 
+        class="search-form" 
+        placeholder="Поиск абонента" />
+    </div>
    
       <div class="v-table_header">
           <p @click="sortById">Номер заявки <i class="material-icons">unfold_more</i></p>
@@ -56,21 +63,29 @@ export default {
   },
   data: () => {
     return{
+        search: '',
         usersPerPage: 5,
         pageNumber: 1,
         newUsers: {},
         
     }
   },
-  computed: {
+  computed: {  
+     searcHandler(){
+         return this.users_data.filter(elem => {
+           return elem.name.toLowerCase().includes(this.search.toLowerCase());
+         });
+      }, 
+     
       pages(){
-        return Math.ceil(this.users_data.length / this.usersPerPage);
+        return Math.ceil(this.searcHandler.length / this.usersPerPage);
       },
-      paginatedUsers(){
+      paginatedUsers(){        
           let from = (this.pageNumber - 1) * this.usersPerPage;
           let to = from + this.usersPerPage;
-          return this.users_data.slice(from, to);
+          return this.searcHandler.slice(from, to);
       },
+     
     
   },
   methods: {
