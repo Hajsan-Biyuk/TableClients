@@ -19,10 +19,10 @@
       </div>
       <div class="v-table_body">
           <v-table-row 
-            v-for="(row, index) in paginatedUsers"
+            v-for="row in paginatedUsers"
             :key="row.id"
-            :row_data="row"
-             @click="deleteFind(index)"        
+            :row_data="row" 
+             @delClient="delIdUser"      
           />
       </div>
       <div class="v-table_pagination">
@@ -66,7 +66,6 @@ export default {
         search: '',
         usersPerPage: 5,
         pageNumber: 1,
-        newUsers: {},
         
     }
   },
@@ -185,14 +184,19 @@ export default {
       addNewUser(data){
        // console.log(data);
         let u_data=this.users_data;
-      u_data.push(data);
-       data = {};
+        u_data.push({ id: u_data.length + 1, msisdn: data.msisdn, name:data.name, trpl:data.trpl, status:data.status, date:data.date });
+        data.id = data.msisdn = data.name = data.trpl = data.status = data.date = " ";
+        data = {};
       },
       
-      deleteFind(index) {
-      console.log(index);
+      delIdUser(data) {
+      console.log(data);
         let u_data=this.users_data;
-        u_data.splice(index, 1);
+
+        // u_data.splice(index, 1);
+
+        let i = u_data.map(item => item.id).indexOf(data) // find index of your object
+        u_data.splice(i, 1) 
     } 
 
   }

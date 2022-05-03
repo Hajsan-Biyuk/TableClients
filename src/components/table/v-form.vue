@@ -2,10 +2,10 @@
     <div class="v-form">
         <div class="form-group-wr">
   <p>Добавить нового абонента</p>
-  <div class="form-group">
+  <!-- <div class="form-group">
     <label>Номер заявки</label>
     <input type="text" class="form-control" v-model="newUser.id" >
-  </div>
+  </div> -->
 
   <div class="form-group">
     <label>Номер телефона</label>

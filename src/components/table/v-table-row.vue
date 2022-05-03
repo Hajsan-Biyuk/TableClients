@@ -6,7 +6,7 @@
      <div class="row row_trpl">{{row_data.trpl}}</div>
      <div class="row row_status">{{row_data.status}}</div>
      <div class="row row_date">{{row_data.date}}</div>    
-     <div class="del">X</div>
+     <div class="del" @click="delUser">X</div>
   </div>
   
 </template>
@@ -30,7 +30,10 @@ export default {
   },
   computed: {},
    methods: {
-    
+    delUser() {
+    this.$emit('delClient', this.row_data.id);
+
+    }
 
   }
 
@@ -41,6 +44,8 @@ export default {
 .v-table-row {
     display: flex;
     justify-content: space-around;
+    border: 1px solid #ccc;
+    margin-bottom: 5px;
 }
 .row {
     text-align: left;
@@ -49,6 +54,10 @@ export default {
 }
 .del {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 5px;
 }
 
 
